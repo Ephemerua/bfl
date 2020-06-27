@@ -1,4 +1,5 @@
 #include "libc_funcs.h"
+#include "syscall.h"
 
 int _strncmp(char*a, char*b, size_t len)
 {
@@ -44,10 +45,10 @@ char* _getenv(char* name, char** envp){
     return NULL;
 }
 
-int64_t _atol(char* p)
+int64_t _atol(unsigned char* p)
 {
     int64_t result = 0;
-    char *end = p;
+    unsigned char *end = p;
     while(*end){
         end++;
     }
@@ -59,4 +60,22 @@ int64_t _atol(char* p)
         p++;
     }
     return result;
+}
+
+void * _memset(void *b, int c, size_t len)
+{
+    len--;
+    while(len >= 0)
+    {
+        *(char*)(b + len) = (char)c;
+        len--;
+    }
+    return b;
+}
+
+
+int _raise(int sig)
+{
+    int pid = bfl_getpid();
+    return bfl_kill(pid, sig);
 }

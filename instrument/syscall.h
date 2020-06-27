@@ -4,18 +4,34 @@
 #include <stdint.h>
 #include <stddef.h>
 
-size_t bfl_read(int fd, char* dst, size_t len);
+// typedefs
+typedef uint8_t u8;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef uint64_t u64;
 
-uint64_t bfl_open(char* filename, uint64_t flag, uint64_t mode);
+typedef int8_t s8;
+typedef int16_t s16;
+typedef int32_t s32;
+typedef int64_t s64;
 
-size_t bfl_write(int fd, char* dmst, size_t len);
 
-int64_t bfl_shmat(int shm_id);
+size_t bfl_read(s32 fd, u8* dst, size_t len);
 
-uint64_t bfl_wait4(int id, int* infop, int options, int rusage);
+size_t bfl_write(int fd, u8* dst, size_t len);
 
-uint64_t bfl_exit(uint64_t errer_code);
+u64 bfl_open(u8* filename, u64 flag, u64 mode);
 
-uint64_t bfl_close(int fd);
+void* bfl_shmat(int shm_id);
 
-int bfl_fork();
+u64 bfl_wait4(int id, int* infop, int options, int rusage);
+
+u64 bfl_exit(s32 errer_code);
+
+s32 bfl_close(s32 fd);
+
+s32 bfl_kill(s32 pid, s32 sig);
+
+s32 bfl_fork();
+
+s32 bfl_getpid();

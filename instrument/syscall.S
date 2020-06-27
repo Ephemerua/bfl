@@ -1,5 +1,6 @@
 
-.global bfl_read, bfl_close, bfl_exit, bfl_wait4, bfl_write, bfl_fork, bfl_shmat, bfl_open
+.global bfl_read, bfl_close, bfl_exit, bfl_wait4, bfl_write
+.global bfl_fork, bfl_shmat, bfl_open, bfl_kill, bfl_getpid
 
 bfl_read:
 	movq $0, %rax
@@ -43,4 +44,13 @@ bfl_fork:
 	syscall
 	ret
 
+bfl_kill:
+	movq $62, %rax
+	syscall
+	ret
 
+
+bfl_getpid:
+	movq $39, %rax
+	syscall
+	ret

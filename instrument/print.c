@@ -3,7 +3,7 @@
 
 void print_address(int fd, void* addr)
 {
-    char buf[0x14];
+    unsigned char buf[0x14];
     uint64_t temp = (uint64_t)addr;
     buf[0] = '0';
     buf[1] = 'x';
@@ -16,3 +16,6 @@ void print_address(int fd, void* addr)
     }
     bfl_write(fd, buf, 0x13);
 }
+
+#define PRINT(x) \
+do { bfl_write(1, x, sizeof(x))} while(0)
